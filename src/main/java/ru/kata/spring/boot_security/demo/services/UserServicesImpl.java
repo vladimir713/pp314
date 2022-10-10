@@ -34,10 +34,10 @@ public class UserServicesImpl implements UserService {
 
     RoleRepository roleRepository;
 
-//    @Autowired
-//    public void setRoleRepository(RoleRepository roleRepository) {
-//        this.roleRepository = roleRepository;
-//    }
+    @Autowired
+    public void setRoleRepository(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     //@Autowired
     private PasswordEncoder bCryptPasswordEncoder;
@@ -58,7 +58,7 @@ public class UserServicesImpl implements UserService {
 
     @Override
     public List<User> index() {
-        return (List<User>) ur.findAll();
+        return ur.findAll();
     }
 
 //    @Transactional
@@ -68,7 +68,7 @@ public class UserServicesImpl implements UserService {
         if (userFromDB != null) {
             return false;
         }
-        user.setRoles(Collections.singleton(new Role(2, "ROLE_USER")));
+        user.setRoles(Collections.singleton(new Role(2, "USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         ur.save(user);
         return true;
