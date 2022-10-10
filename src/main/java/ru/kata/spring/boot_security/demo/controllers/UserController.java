@@ -31,9 +31,9 @@ public class UserController {
         model.addAttribute("user", user);
         return "edit";
     }
-    @GetMapping
-    public String show(Model model) {
-        User showUser = userService.show()
-        return "user";
-    }
+//    @GetMapping
+//    public String show(Model model) {
+//        User showUser = userService.show()
+//        return "user";
+//    }
 }
