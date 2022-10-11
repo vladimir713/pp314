@@ -39,10 +39,10 @@ public class UserServicesImpl implements UserService {
     //@Autowired
     private PasswordEncoder bCryptPasswordEncoder;
 
-//    @Autowired
-//    public void setBCryptPasswordEncoder(PasswordEncoder bCryptPasswordEncoder) {
-//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-//    }
+    @Autowired
+    public void setBCryptPasswordEncoder(PasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Autowired
     public UserServicesImpl(UserRepository ur) {

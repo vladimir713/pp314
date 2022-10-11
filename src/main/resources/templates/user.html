@@ -13,7 +13,7 @@
 <div>Age:</div>
 <div th:text="${user.getAge()}"></div>
 <div sec:authorize="isAuthenticated()" >Виден только авторизованным пользователям</div>
-<div th:if="${user.getAuthorities().contains('ADMIN')}">Это админ</div>
+<div th:if="${user.getAuthorities().contains('name=ADMIN')}">Это админ</div>
 
 </body>
 </html>

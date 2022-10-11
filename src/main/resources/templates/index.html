@@ -19,15 +19,15 @@
         <td th:text="${user.getId()}"></td>
         <td th:text="${user.getUsername()}"></td>
         <td th:text="${user.getAge()}"></td>
-        <td><a th:href="@{/edit/{id}(id=${user.getId()})}">edit</a></td>
+        <td><a th:href="@{/admin/edit/{id}(id=${user.getId()})}">edit</a></td>
 
-        <td><form th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}">
+        <td><form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
             <input type="submit" value="Delete"/>
         </form>
         </td>
     </tr>
 </table>
 <h2>Add</h2>
-<a th:href ="@{/new}">Add new user</a>
+<a th:href ="@{/admin/new}">Add new user</a>
 </body>
 </html>

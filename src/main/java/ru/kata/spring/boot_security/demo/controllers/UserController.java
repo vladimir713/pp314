@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -31,9 +33,10 @@ public class UserController {
         model.addAttribute("user", user);
         return "edit";
     }
-//    @GetMapping
-//    public String show(Model model) {
-//        User showUser = userService.show()
-//        return "user";
-//    }
+    @GetMapping
+    public String show(Principal p, Model model) {
+        User showUser = userService.findByUsername(p.getName());
+        model.addAttribute("user", showUser);
+        return "user";
+    }
 }
