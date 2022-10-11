@@ -5,7 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.Role;
@@ -16,9 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 @Service
@@ -28,7 +25,7 @@ public class UserServicesImpl implements UserService {
     private UserRepository ur;
 
     @Autowired
-    public void setUr(UserRepository ur) {
+    public void setUserRepository(UserRepository ur) {
         this.ur = ur;
     }
 
@@ -52,6 +49,7 @@ public class UserServicesImpl implements UserService {
         this.ur = ur;
     }
 
+    @Override
     public User findByUsername(String username) {
         return ur.findByUsername(username);
     }
@@ -94,10 +92,10 @@ public class UserServicesImpl implements UserService {
             throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                mapRolesToAutorities(user.getRoles()));
+                mapRolesToAuthorities(user.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAutorities(Collection<Role> roles) {
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
 }

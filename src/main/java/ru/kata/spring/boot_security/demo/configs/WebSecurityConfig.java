@@ -2,12 +2,18 @@ package ru.kata.spring.boot_security.demo.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import ru.kata.spring.boot_security.demo.services.UserService;
+
+import javax.sql.DataSource;
 
 //@Configuration
 @EnableWebSecurity
@@ -40,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/profile/**").authenticated()
 //                .antMatchers("/").not().fullyAuthenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
 //                .antMatchers("/", "/user/**").permitAll()
 //                .anyRequest().authenticated()
                 .and()
@@ -79,11 +85,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
 //    }
 
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authenticationProvider.setUserDetailsService(userService);
+        return authenticationProvider;
+    }
 //    @Bean
-//    public DaoAuthenticationProvider daoAuthenticationProvider() {
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        authenticationProvider.setPasswordEncoder(passwordEncoder());
-//        authenticationProvider.setUserDetailsService(userService);
-//        return authenticationProvider;
+//    JdbcUserDetailsManager users(DataSource dataSource) {
+//        UserDetails user = User.builder()
+//                .username("user2")
+//                .password("{brypt}$2a$12$T7O3Iahv71W/LD6.NH5zzO3d5pC2by3JTgdYiLDxzDekOdHXPqZrK")
+//                .roles("USER")
+//                .build();
+//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        if (jdbcUserDetailsManager.userExists(user.getUsername())) {
+//            jdbcUserDetailsManager.deleteUser(user.getUsername());
+//        }
+//        jdbcUserDetailsManager.createUser(user);
+//        return jdbcUserDetailsManager;
 //    }
 }

@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
+    public User findByUsername(String user);
+
     public List<User> index();
 
     public boolean save(User user);

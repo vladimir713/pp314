@@ -33,11 +33,11 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Collection<Role> roles;
 
-    public void addRole(Role role) {
-        this.roles.add(role);
-    }
+//    public void addRole(Role role) {
+//        this.roles.add(role);
+//    }
 
 //    @JoinTable(name = "users_roles",
 //    joinColumns = @JoinColumn(name = "user_id"),
