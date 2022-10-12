@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,9 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 public class AdminController {
 
     private final UserService userService;
+
+//    @Autowired
+//    BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public AdminController(UserService userService) {
