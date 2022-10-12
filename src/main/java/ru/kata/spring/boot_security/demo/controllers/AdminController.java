@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +39,6 @@ public class AdminController {
     @PostMapping("/new")
     public String create(@ModelAttribute("user") User person, BindingResult bindingResult, Model model ) {
         if (bindingResult.hasErrors()) {
-            System.out.println("Ошибка -----------------------------------------------------------");
             return "new";
         }
         if (!userService.save(person)) {
@@ -52,7 +50,9 @@ public class AdminController {
 
     @PostMapping("/edit/{id}")
     public String update(@PathVariable("id") int id, @ModelAttribute("user") User newUser) {
-//        User userOld = userService.show(id);
+        User userOld = userService.show(id);
+        newUser.setPassword(userOld.getPassword());
+        newUser.setRoles(userOld.getRoles());
         userService.update(newUser);
         return "redirect:/admin";
     }

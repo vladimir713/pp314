@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Spring Security Example</title>
 </head>
 <body>
-<div>Username:</div>
-<div th:text="${user.getUsername()}"></div>
-<div>Authorities:</div>
-<div th:text="${user.getRoles()}"></div>
-<div>Age:</div>
-<div th:text="${user.getAge()}"></div>
-<div sec:authorize="isAuthenticated()" >Виден только авторизованным пользователям</div>
-<div th:if="${user.getAuthorities().contains('name=ADMIN')}">Это админ</div>
-
+    <div>Username:</div>
+    <div th:text="${user.getUsername()}"></div>
+    <div>Authorities:</div>
+    <div th:each="u:${user.getRoles()}">
+        <div th:text="${u.getName()}"/>
+    </div>
+    <div>Age:</div>
+    <div th:text="${user.getAge()}"></div>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Выйти</button>
+    </form>
 </body>
 </html>
