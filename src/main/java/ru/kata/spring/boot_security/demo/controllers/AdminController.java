@@ -51,9 +51,9 @@ public class AdminController {
     }
 
     @PostMapping("/edit/{id}")
-    public String update(@PathVariable("id") int id) {
-        User user = userService.show(id);
-        userService.save(user);
+    public String update(@PathVariable("id") int id, @ModelAttribute("user") User newUser) {
+//        User userOld = userService.show(id);
+        userService.update(newUser);
         return "redirect:/admin";
     }
     @GetMapping("/edit/{id}")

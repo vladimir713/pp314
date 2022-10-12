@@ -87,6 +87,11 @@ public class UserServicesImpl implements UserService {
         return ur.findById(id).orElse(null);
     }
 
+    @Override
+    public void update(User user) {
+        ur.saveAndFlush(user);
+    }
+
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
