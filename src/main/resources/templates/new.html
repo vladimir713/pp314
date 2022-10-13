@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>New person</title>
-</head>
-<body>
-
-<form th:method="POST" th:action="@{/admin/new}" th:object="${user}">
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{username}" id="name"/>
-    <label for="age">Enter age: </label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <label for="password">Enter password: </label>
-    <input type="password" th:field="*{password}" id="password"/>
-    <br/>
-    <input type="submit" value="Create!"/>
-</form>
-<form th:action="@{/logout}" method="post">
-    <button type="submit">Выйти</button>
-</form>
-</body>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>New person</title>
+    </head>
+    <body>
+        <form th:method="POST" th:action="@{/admin/new}" th:object="${user}">
+            <label for="name">Enter name: </label>
+            <input type="text" th:field="*{username}" id="name"/>
+            <label for="age">Enter age: </label>
+            <input type="text" th:field="*{age}" id="age"/>
+            <label for="password">Enter password: </label>
+            <input type="password" th:field="*{password}" id="password"/>
+            <br/>
+            <input type="submit" value="Create!"/>
+        </form>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Выйти</button>
+        </form>
+    </body>
 </html>

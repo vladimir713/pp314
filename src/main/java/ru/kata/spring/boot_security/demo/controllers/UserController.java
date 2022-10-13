@@ -20,23 +20,10 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @PostMapping("/edit")
-//    public String update(User user) {
-//        userService.save(user);
-//        return "redirect:/user";
-//    }
-//    @GetMapping("/edit/{id}")
-//    public String updateForm(@PathVariable("id") int id, Model model) {
-//        User user = userService.show(id);
-//        model.addAttribute("user", user);
-//        return "edit";
-//    }
     @GetMapping
     public String show(Principal p, Model model) {
         User showUser = userService.findByUsername(p.getName());
         model.addAttribute("user", showUser);
-
-        showUser.getRoles().stream().forEach(x -> System.out.println(x.getName()));
         return "user";
     }
 }

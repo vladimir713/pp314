@@ -3,15 +3,14 @@ package ru.kata.spring.boot_security.demo.model;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Vladimir Chugunov
  */
+
 @Data
 @Entity
 @Table(name = "users")
@@ -33,21 +32,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Collection<Role> roles;
-
-//    public void addRole(Role role) {
-//        this.roles.add(role);
-//    }
-
-//    @JoinTable(name = "users_roles",
-//    joinColumns = @JoinColumn(name = "user_id"),
-//    inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private Collection<Role> roles;
-
-//    public User(String name, String password) {
-//        this.name = name;
-//        this.password = password;
-//    }
+    private Collection<Role> roles = new ArrayList<>();
 
     public User() {
 
@@ -78,37 +63,4 @@ public class User implements UserDetails {
         return true;
     }
 
-//    public int getAge() {
-//        return age;
-//    }
-//
-//    public void setAge(int age) {
-//        this.age = age;
-//    }
-//
-//    public User(int id, String name, int age) {
-//        this.id = id;
-//        this.name = name;
-//        this.age = age;
-//    }
-
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 }

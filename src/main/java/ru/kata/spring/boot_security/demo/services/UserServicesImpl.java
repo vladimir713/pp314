@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.Role;
@@ -23,7 +22,6 @@ import javax.transaction.Transactional;
 @Service
 public class UserServicesImpl implements UserService {
 
-    //@PersistenceContext
     private UserRepository ur;
 
     @Autowired
@@ -38,13 +36,7 @@ public class UserServicesImpl implements UserService {
         this.roleRepository = roleRepository;
     }
 
-//    @Autowired
     private final PasswordEncoder passwordEncoder;
-
-//    @Autowired
-//    public void setBCryptPasswordEncoder(PasswordEncoder passwordEncoder) {
-//        this.passwordEncoder = passwordEncoder;
-//    }
 
     @Autowired
     public UserServicesImpl(UserRepository ur, @Lazy PasswordEncoder passwordEncoder) {
@@ -62,7 +54,6 @@ public class UserServicesImpl implements UserService {
         return ur.findAll();
     }
 
-//    @Transactional
     @Override
     public boolean save(User user) {
         User userFromDB = ur.findByUsername(user.getUsername());
@@ -75,13 +66,11 @@ public class UserServicesImpl implements UserService {
         return true;
     }
 
-//    @Transactional
     @Override
     public void delete(int id) {
         ur.deleteById(id);
     }
 
-//    @Transactional
     @Override
     public User show(int id) {
         return ur.findById(id).orElse(null);
