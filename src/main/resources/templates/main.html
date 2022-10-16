@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bootstrap 4, from LayoutIt!</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+		<div class="text-white bg-dark p-1">
+			<div class="row">
+				<div class="col-md-11">
+					<div class="d-flex justify-content-start">
+						<div class="align-content-center">
+							<div class="p-1 d-inline-block" th:text="${principalUser.getUsername()}"></div>
+							<div class="p-1 d-inline-block">with roles:</div>
+							<div class="p-1 d-inline-block" th:text="${principalUser.showRoles()}"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1">
+					<div class="justify-content-end">
+						<button type="button" class="btn btn-link">
+							Logout
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="row">
+		<div class="col-md-2">
+			<ul class="nav flex-column nav-pills">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#">Admin</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">User</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-10">
+			<div class="page-header">
+				<h1>
+					Admin panel
+				</h1>
+			</div>
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#usersTable">Users table</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#newUser">New User</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="usersTable">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									ID
+								</th>
+								<th>
+									First Name
+								</th>
+								<th>
+									Last Name
+								</th>
+								<th>
+									Age
+								</th>
+								<th>
+									Email
+								</th>
+								<th>
+									Role
+								</th>
+								<th>
+									Edit
+								</th>
+								<th>
+									Delete
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user:${users}">
+								<td th:text="${user.getId()}"></td>
+								<td th:text="${user.getFirstName()}"></td>
+								<td th:text="${user.getLastName()}"></td>
+								<td th:text="${user.getAge()}"></td>
+								<td th:text="${user.getUsername()}"></td>
+								<td th:text="${user.showRoles()}"></td>
+								<td>
+									<form th:method="EDIT" th:action="@{/admin/edit/{id}(id=${user.getId()})}">
+										<input type="submit" value="Edit"/>
+									</form>
+								</td>
+								<td>
+									<form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
+										<input type="submit" value="Delete"/>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+					<div class="tab-pane" id="newUser">
+						<p>lnlhldjbglkwjbgklwrjbgkwb</p>
+						<form th:method="POST" th:action="@{/admin/new}" th:object="${principalUser}">
+							<label for="name">Enter name: </label>
+							<input type="text" th:field="*{username}" id="name"/>
+							<label for="age">Enter age: </label>
+							<input type="text" th:field="*{age}" id="age"/>
+							<label for="password">Enter password: </label>
+							<input type="password" th:field="*{password}" id="password"/>
+							<br/>
+							<input type="submit" value="Create!"/>
+						</form>
+					</div>
+
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+		</div>
+	</div>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

@@ -38,7 +38,10 @@ public class ConstructAdminRoles {
         ur.deleteAll();
         ur.flush();
         User admin = new User();
-        admin.setUsername("admin");
+        admin.setUsername("admin@mail.ru");
+        admin.setFirstName("admin");
+        admin.setLastName("admin");
+        admin.setAge(51);
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.getRoles().add(role1);
         admin.getRoles().add(role2);

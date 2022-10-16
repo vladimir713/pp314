@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
+import java.security.Principal;
+
 /**
  * @author Vladimir Chugunov
  */
@@ -23,9 +25,11 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String index(Model model) {
+    public String index(Model model, Principal p) {
+        User principalUser = userService.findByUsername(p.getName());
         model.addAttribute("users", userService.index());
-        return "index";
+        model.addAttribute("principalUser", principalUser);
+        return "main";
     }
 
     @GetMapping("/new")
@@ -33,7 +37,7 @@ public class AdminController {
         return "new";
     }
 
-    @PostMapping("/new")
+//    @PostMapping("/new")
     public String create(@ModelAttribute("user") User person, BindingResult bindingResult, Model model ) {
         if (bindingResult.hasErrors()) {
             return "new";
@@ -45,7 +49,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/edit/{id}")
+//    @PostMapping("/edit/{id}")
     public String update(@PathVariable("id") int id, @ModelAttribute("user") User newUser) {
         User userOld = userService.show(id);
         newUser.setPassword(userOld.getPassword());
@@ -53,14 +57,14 @@ public class AdminController {
         userService.update(newUser);
         return "redirect:/admin";
     }
-    @GetMapping("/edit/{id}")
+//    @GetMapping("/edit/{id}")
     public String updateForm(@PathVariable("id") int id, Model model) {
         User user = userService.show(id);
         model.addAttribute("user", user);
         return "edit";
     }
 
-    @PostMapping("/delete/{id}")
+//    @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.delete(id);
         return "redirect:/admin";
