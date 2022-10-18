@@ -30,6 +30,8 @@ public class MainController {
     public String loginId(@PathVariable("id") String username, @ModelAttribute("user") User user) {
         return "redirect:/admin";
     }
+
+
 //    @GetMapping("/")
     public String adminPanel(Model model, Principal p) {
         User showUser = userService.findByUsername(p.getName());

@@ -29,15 +29,23 @@ public class AdminController {
         User principalUser = userService.findByUsername(p.getName());
         model.addAttribute("users", userService.index());
         model.addAttribute("principalUser", principalUser);
+        model.addAttribute("roles", userService.listRoles());
         return "main";
     }
 
-    @GetMapping("/new")
-    public String newPerson(@ModelAttribute("user") User person) {
-        return "new";
-    }
+//    @GetMapping("/new")
+//    public String newPerson(@ModelAttribute("user") User person) {
+//        return "new";
+//    }
 
-//    @PostMapping("/new")
+    @GetMapping("/new")
+    public String newUserPanel(Model model, Principal p) {
+        model.addAttribute("principalUser", userService.findByUsername(p.getName()));
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", userService.listRoles());
+        return "newUser";
+    }
+    @PostMapping("/")
     public String create(@ModelAttribute("user") User person, BindingResult bindingResult, Model model ) {
         if (bindingResult.hasErrors()) {
             return "new";
@@ -46,7 +54,7 @@ public class AdminController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "new";
         }
-        return "redirect:/admin";
+        return "redirect:/";
     }
 
 //    @PostMapping("/edit/{id}")

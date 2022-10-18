@@ -81,6 +81,11 @@ public class UserServicesImpl implements UserService {
         ur.saveAndFlush(user);
     }
 
+    @Override
+    public List<Role> listRoles() {
+        return roleRepository.findAll();
+    }
+
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
