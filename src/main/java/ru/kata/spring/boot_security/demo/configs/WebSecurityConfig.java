@@ -34,15 +34,16 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").authenticated()
+//                .antMatchers("/").authenticated()
 //                .antMatchers("/profile/**").authenticated()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/user/**").hasAuthority("USER")
-
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .successHandler(successUserHandler)
+                .permitAll()
                 .and()
                 .logout()
                 .permitAll()

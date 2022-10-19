@@ -26,10 +26,10 @@ public class MainController {
         return "login";
     }
 
-    @PostMapping("/login/{id}")
-    public String loginId(@PathVariable("id") String username, @ModelAttribute("user") User user) {
-        return "redirect:/admin";
-    }
+//    @PostMapping("/login/{id}")
+//    public String loginId(@PathVariable("id") String username, @ModelAttribute("user") User user) {
+//        return "redirect:/admin";
+//    }
 
 
 //    @GetMapping("/")

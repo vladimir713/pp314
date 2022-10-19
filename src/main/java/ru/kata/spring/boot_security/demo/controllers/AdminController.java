@@ -14,7 +14,7 @@ import java.security.Principal;
  * @author Vladimir Chugunov
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping(value = "/admin")
 public class AdminController {
 
     private final UserService userService;
@@ -24,12 +24,14 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping
     public String index(Model model, Principal p) {
+        System.out.println("get - /admin - main");
         User principalUser = userService.findByUsername(p.getName());
         model.addAttribute("users", userService.index());
         model.addAttribute("principalUser", principalUser);
         model.addAttribute("roles", userService.listRoles());
+
         return "main";
     }
 
@@ -40,13 +42,15 @@ public class AdminController {
 
     @GetMapping("/new")
     public String newUserPanel(Model model, Principal p) {
+        System.out.println("get /admin/new - newUser");
         model.addAttribute("principalUser", userService.findByUsername(p.getName()));
         model.addAttribute("user", new User());
         model.addAttribute("roles", userService.listRoles());
         return "newUser";
     }
-    @PostMapping("/")
+    @PostMapping("/new")
     public String create(@ModelAttribute("user") User person, BindingResult bindingResult, Model model ) {
+        System.out.println("post - /admin - /admin");
         if (bindingResult.hasErrors()) {
             return "new";
         }
@@ -54,7 +58,7 @@ public class AdminController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "new";
         }
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
 //    @PostMapping("/edit/{id}")
