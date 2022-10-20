@@ -37,7 +37,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //                .antMatchers("/").authenticated()
 //                .antMatchers("/profile/**").authenticated()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/user/**").hasAuthority("USER")
+                .antMatchers("/user/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

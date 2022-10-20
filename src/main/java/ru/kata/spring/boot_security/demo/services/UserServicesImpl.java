@@ -60,7 +60,8 @@ public class UserServicesImpl implements UserService {
         if (userFromDB != null) {
             return false;
         }
-        user.setRoles(Collections.singleton(new Role(2, "USER")));
+//        user.setRoles(Collections.singleton(new Role(2, "USER")));
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         ur.saveAndFlush(user);
         return true;

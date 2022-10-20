@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,9 +30,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="justify-content-end">
-						<button type="button" class="btn btn-link">
-							Logout
-						</button>
+						<form th:action="@{/logout}" method="POST">
+							<button type="submit" class="btn btn-link btn-dark text-secondary">
+								Logout
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -41,10 +43,10 @@
 		<div class="col-md-2">
 			<ul class="nav flex-column nav-pills">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#">Admin</a>
+					<a class="nav-link active" data-toggle="tab" href="/admin" sec:authorize="hasAuthority('ADMIN')" role="tab">Admin</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">User</a>
+					<a class="nav-link" href="/user" sec:authorize="hasAuthority('USER')" role="tab">User</a>
 				</li>
 			</ul>
 		</div>

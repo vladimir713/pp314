@@ -24,6 +24,7 @@ public class UserController {
     public String show(Principal p, Model model) {
         User showUser = userService.findByUsername(p.getName());
         model.addAttribute("user", showUser);
-        return "user";
+        model.addAttribute("principalUser", userService.findByUsername(p.getName()));
+        return "userBoard";
     }
 }
