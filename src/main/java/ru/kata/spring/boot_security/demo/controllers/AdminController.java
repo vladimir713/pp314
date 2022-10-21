@@ -28,10 +28,11 @@ public class AdminController {
     public String index(Model model, Principal p) {
         System.out.println("get - /admin - main");
         User principalUser = userService.findByUsername(p.getName());
-        model.addAttribute("users", userService.index());
+        User newUser = new User();
+        model.addAttribute("newUser", newUser);
         model.addAttribute("principalUser", principalUser);
         model.addAttribute("roles", userService.listRoles());
-
+        model.addAttribute("users", userService.index());
         return "main";
     }
 
