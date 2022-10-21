@@ -65,6 +65,7 @@ public class AdminController {
     @GetMapping("/edit/{id}")
 //    public String update(@PathVariable("id") int id, @ModelAttribute("user") User newUser) {
         public String find(@PathVariable("id") int id, Model model) {
+        System.out.println("get /edit/id - main");
         model.addAttribute("user", userService.show(id));
 //        User userOld = userService.show(id);
 //        newUser.setPassword(userOld.getPassword());
@@ -74,8 +75,9 @@ public class AdminController {
     }
 
     @PostMapping("/{id}")
-    public String update(@ModelAttribute("user") User user) {
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
         System.out.println("update------------------------------------");
+//        user.setUsername();
         userService.update(user);
         return "redirect:/admin";
     }
