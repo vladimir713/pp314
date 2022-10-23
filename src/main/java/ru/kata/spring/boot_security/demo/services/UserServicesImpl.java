@@ -13,10 +13,8 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.transaction.Transactional;
 
 @Service
@@ -60,8 +58,6 @@ public class UserServicesImpl implements UserService {
         if (userFromDB != null) {
             return false;
         }
-//        user.setRoles(Collections.singleton(new Role(2, "USER")));
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         ur.saveAndFlush(user);
         return true;
@@ -79,6 +75,17 @@ public class UserServicesImpl implements UserService {
 
     @Override
     public void update(User user) {
+
+        if(user.getUsername() == null | user.getUsername().equals("")) {
+            user.setUsername(show(user.getId()).getUsername());
+        }
+        if(user.getPassword() == null | user.getPassword().equals("")) {
+            user.setPassword(show(user.getId()).getPassword());
+        }
+        if(user.getRoles() == null) {
+            user.setRoles(show(user.getId()).getRoles());
+        }
+
         ur.saveAndFlush(user);
     }
 

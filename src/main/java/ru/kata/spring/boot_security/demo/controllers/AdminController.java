@@ -7,7 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.services.UserService;
-
 import java.security.Principal;
 
 /**
@@ -36,19 +35,6 @@ public class AdminController {
         return "main";
     }
 
-//    @GetMapping("/new")
-//    public String newPerson(@ModelAttribute("user") User person) {
-//        return "new";
-//    }
-
-    @GetMapping("/new")
-    public String newUserPanel(Model model, Principal p) {
-        System.out.println("get /admin/new - newUser");
-        model.addAttribute("principalUser", userService.findByUsername(p.getName()));
-        model.addAttribute("user", new User());
-        model.addAttribute("roles", userService.listRoles());
-        return "newUser";
-    }
     @PostMapping("/new")
     public String create(@ModelAttribute("user") User person, BindingResult bindingResult, Model model ) {
         System.out.println("post - /admin - /admin");
@@ -62,33 +48,14 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit/{id}")
-//    public String update(@PathVariable("id") int id, @ModelAttribute("user") User newUser) {
-        public String find(@PathVariable("id") int id, Model model) {
-        System.out.println("get /edit/id - main");
-        model.addAttribute("user", userService.show(id));
-//        User userOld = userService.show(id);
-//        newUser.setPassword(userOld.getPassword());
-//        newUser.setRoles(userOld.getRoles());
-//        userService.update(newUser);
-        return "main";
-    }
-
     @PostMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        System.out.println("update------------------------------------");
-//        user.setUsername();
+    public String update(@ModelAttribute("user") User user) {
+        System.out.println("update---------" + user.getUsername() + "-----" + user.getRoles());
         userService.update(user);
         return "redirect:/admin";
     }
-//    @GetMapping("/edit/{id}")
-    public String updateForm(@PathVariable("id") int id, Model model) {
-        User user = userService.show(id);
-        model.addAttribute("user", user);
-        return "edit";
-    }
 
-//    @PostMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.delete(id);
         return "redirect:/admin";

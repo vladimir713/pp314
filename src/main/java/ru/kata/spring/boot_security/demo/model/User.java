@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import lombok.Data;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
@@ -41,20 +40,12 @@ public class User implements UserDetails {
 
     }
     public String showRoles() {
-//        String rolesString = "";
-//        for (Role role: this.getRoles()) {
-//            rolesString += role.getName() + " ";
-////            System.out.println(role.getName());
-//        }
-//        System.out.printf(this.getRoles().stream().map(Role::getName).map(String::new).collect(Collectors.joining(" ")));
         return this.getRoles().stream().map(Role::getName).map(String::new).collect(Collectors.joining(" "));
     }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

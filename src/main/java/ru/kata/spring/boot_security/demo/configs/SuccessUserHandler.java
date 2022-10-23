@@ -31,14 +31,10 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
         }
         if (hasUserRole) {
             rs.sendRedirect(httpServletRequest, httpServletResponse, "/user");
-            System.out.println("suh - /user");
         } else if (hasAdminRole) {
             rs.sendRedirect(httpServletRequest, httpServletResponse, "/admin");
-            System.out.println("suh - /admin");
         } else {
-            rs.sendRedirect(httpServletRequest, httpServletResponse, "/login");
-            System.out.println("suh - /");
-//            throw new IllegalStateException();
+            rs.sendRedirect(httpServletRequest, httpServletResponse, "/");
         }
     }
 }
