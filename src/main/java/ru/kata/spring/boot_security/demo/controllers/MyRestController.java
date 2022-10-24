@@ -34,4 +34,14 @@ public class MyRestController {
         return user;
     }
 
+    @PutMapping("/users")
+    public User updateUser(@RequestBody User user) {
+        userService.update(user);
+        return user;
+    }
+    @DeleteMapping("/users/{id}")
+    public String deleteUser(@PathVariable int id) {
+        userService.delete(id);
+        return "User with id = " + id + " was deleted";
+    }
 }

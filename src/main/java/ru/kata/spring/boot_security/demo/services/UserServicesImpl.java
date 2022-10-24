@@ -81,6 +81,8 @@ public class UserServicesImpl implements UserService {
         }
         if(user.getPassword() == null | user.getPassword().equals("")) {
             user.setPassword(show(user.getId()).getPassword());
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         if(user.getRoles() == null) {
             user.setRoles(show(user.getId()).getRoles());
