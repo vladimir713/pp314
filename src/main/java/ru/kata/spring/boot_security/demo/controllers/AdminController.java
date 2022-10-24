@@ -12,8 +12,8 @@ import java.security.Principal;
 /**
  * @author Vladimir Chugunov
  */
-@Controller
-@RequestMapping(value = "/admin")
+//@Controller
+//@RequestMapping(value = "/admin")
 public class AdminController {
 
     private final UserService userService;
@@ -23,9 +23,8 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping
+//    @GetMapping
     public String index(Model model, Principal p) {
-        System.out.println("get - /admin - main");
         User principalUser = userService.findByUsername(p.getName());
         User newUser = new User();
         model.addAttribute("newUser", newUser);
@@ -35,9 +34,8 @@ public class AdminController {
         return "main";
     }
 
-    @PostMapping("/new")
+//    @PostMapping("/new")
     public String create(@ModelAttribute("user") User person, BindingResult bindingResult, Model model ) {
-        System.out.println("post - /admin - /admin");
         if (bindingResult.hasErrors()) {
             return "new";
         }
@@ -48,14 +46,14 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/{id}")
+//    @PostMapping("/{id}")
     public String update(@ModelAttribute("user") User user) {
         System.out.println("update---------" + user.getUsername() + "-----" + user.getRoles());
         userService.update(user);
         return "redirect:/admin";
     }
 
-    @PostMapping("/delete/{id}")
+//    @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.delete(id);
         return "redirect:/admin";
