@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Configuration
@@ -30,23 +31,36 @@ public class WebSecurityConfig {
 
     @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/user/**").authenticated()
-                .antMatchers("/users/**").authenticated()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
+        http.formLogin().loginPage("/login")
                 .successHandler(successUserHandler)
                 .permitAll()
-                .failureUrl("/")
                 .and()
                 .logout()
                 .permitAll()
-                .logoutSuccessUrl("/");
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
+                .and()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/").authenticated();
+//        http
+//                .csrf().disable();
+//                .authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/admin/**").hasAuthority("ADMIN")
+//                .antMatchers("/user/**").authenticated()
+//                .antMatchers("/users/**").authenticated()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .successHandler(successUserHandler)
+//                .permitAll()
+//                .failureUrl("/")
+//                .and()
+//                .logout()
+//                .permitAll()
+//                .logoutSuccessUrl("/");
     return http.build();
     }
 

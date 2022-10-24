@@ -18,7 +18,7 @@ public class MyRestController {
         this.userService = userService;
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/users")
     public List<User> showAllUsers() {
         return userService.index();
     }

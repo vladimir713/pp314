@@ -9,18 +9,18 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.services.UserService;
 import java.security.Principal;
 
-@Controller
-@RequestMapping("/user")
+//@Controller
+//@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
 
-    @Autowired
+//    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping
+//    @GetMapping
     public String show(Principal p, Model model) {
         User showUser = userService.findByUsername(p.getName());
         model.addAttribute("user", showUser);
