@@ -31,18 +31,26 @@ public class WebSecurityConfig {
 
     @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/login")
-                .successHandler(successUserHandler)
+        http
+                .authorizeRequests()
+                .antMatchers("/static/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginPage("/login")
+//                .successHandler(successUserHandler)
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
+//                .and()
+//                .csrf().disable()
+//                .authorizeRequests();
                 .and()
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/").authenticated();
+                .headers()
+                .frameOptions().sameOrigin();
+//                .antMatchers("/").authenticated();
 //        http
 //                .csrf().disable();
 //                .authorizeRequests()
