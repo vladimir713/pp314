@@ -35,7 +35,7 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
             rs.sendRedirect(httpServletRequest, httpServletResponse, "/");
         }
         else {
-            rs.sendRedirect(httpServletRequest, httpServletResponse, "/");
+            rs.sendRedirect(httpServletRequest, httpServletResponse, "/login");
         }
     }
 }
