@@ -81,7 +81,6 @@ function getRolesFromAddUserForm() {
     console.log(rolesToAdd);
     return rolesToAdd;
 }
-
 addUserForm.addEventListener("submit", (e) => {
     e.preventDefault();
     fetch(requestURL, {
