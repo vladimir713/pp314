@@ -35,7 +35,7 @@ const fillUsers = (users) => {
                             data-id="${user.id}">Edit</button>
                     </td>
                     <td> 
-                        <button type="button" class="btn btn-danger" id="btn-delete-modal-call" 
+                        <button type="button" class="btn btn-danger" id="btnDeleteCall" 
                             data-id="${user.id}">Delete</button>
                     </td>
                 </tr>
@@ -121,11 +121,11 @@ const editRoleAdminOption = document.getElementById("editRoleAdmin");
 const editRoleUserOption = document.getElementById("editRoleUser");
 
 //delete
-const deleteRoleAdminOption = document.getElementById("delete-role_admin");
-const deleteRoleUserOption = document.getElementById("delete-role_user");
-const modalDeleteSubmitBtn = document.getElementById("submit_btn-modal-delete");
-const modalDeleteExitBtn = document.getElementById("exit_btn-modal-delete");
-const modalDeleteCloseBtn = document.getElementById("close_btn-modal-delete");
+const deleteRoleAdminOption = document.getElementById("deleteRoleAdmin");
+const deleteRoleUserOption = document.getElementById("deleteRoleUser");
+const modalDeleteSubmitBtn = document.getElementById("deleteSubmit");
+const modalDeleteExitBtn = document.getElementById("deleteExit");
+const modalDeleteCloseBtn = document.getElementById("deleteClose");
 
 
 
@@ -154,18 +154,17 @@ function getRolesFromEditUserForm() {
 //tracking submit click Edit/Delete
 allUsersTable.addEventListener("click", e => {
     e.preventDefault();
-    let delButtonIsPressed = e.target.id === 'btn-delete-modal-call';
+    let delButtonIsPressed = e.target.id === 'btnDeleteCall';
     let editButtonIsPressed = e.target.id === 'btnEditCall';
 
 
 //getting data for DELETE user
 
-    const deleteUsersId = document.getElementById("delete-id")
-    const deleteUsersName = document.getElementById("delete-name")
-    const deleteUsersLastName = document.getElementById("delete-lastName")
-    const deleteUsersUsername = document.getElementById("delete-username")
-    const deleteUsersPassword = document.getElementById("delete-password")
-    const deleteUsersEnabled = document.getElementById("delete-Enabled")
+    const deleteUsersId = document.getElementById("dId")
+    const deleteUsersName = document.getElementById("dFirstname")
+    const deleteUsersLastName = document.getElementById("dLastname")
+    const deleteUsersUsername = document.getElementById("dEmail")
+    const deleteUsersAge = document.getElementById("dAge")
 
     if (delButtonIsPressed) {
         let currentUserId = e.target.dataset.id;
@@ -178,11 +177,10 @@ allUsersTable.addEventListener("click", e => {
             .then(res => res.json())
             .then(user => {
                 deleteUsersId.value = user.id;
-                deleteUsersName.value = user.name;
+                deleteUsersName.value = user.firstName;
                 deleteUsersLastName.value = user.lastName;
                 deleteUsersUsername.value = user.username;
-                deleteUsersPassword.value = user.password;
-                deleteUsersEnabled.value = user.enabled;
+                deleteUsersAge.value = user.age;
 
                 let deleteRoles = user.roles.map(role => role.name)
                 deleteRoles.forEach(

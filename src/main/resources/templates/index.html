@@ -185,14 +185,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+						<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true" id="modal-delete">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<form>
 
 										<div class="modal-header">
 											<h4 class="modal-title">Delete user</h4>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="deleteClose">
 												<span aria-hidden="true">&times;</span>
 											</button>
 
@@ -258,10 +258,12 @@
 													<select multiple class="form-control w-100"
 															size="2"
 															id="dRole"
-															name="roles"
-													>
-														<option>
-
+															name="roles">
+														<option id="deleteRoleAdmin" value="2">
+															ADMIN
+														</option>
+														<option id="deleteRoleUser" value="1">
+															USER
 														</option>
 													</select>
 												</div>
@@ -269,10 +271,10 @@
 										</div>
 
 										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+											<button type="button" class="btn btn-secondary" data-dismiss="modal" id="deleteExit">Close
 											</button>
 											<input type="submit" class="btn btn-danger"
-												   value="Delete"/>
+												   value="Delete" id="deleteSubmit"/>
 										</div>
 									</form>
 								</div>
