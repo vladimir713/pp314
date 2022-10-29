@@ -9,6 +9,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 
@@ -57,5 +58,11 @@ public class MyRestController {
     @GetMapping("/roles")
     public ResponseEntity<Collection<Role>> getAllRoles() {
         return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<User> getUserByUsername (Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        return new ResponseEntity<>(user,HttpStatus.OK);
     }
 }

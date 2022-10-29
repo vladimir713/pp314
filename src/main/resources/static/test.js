@@ -6,16 +6,47 @@ const FormAge = document.getElementById("ag");
 const FormRoles = document.getElementById("newUserRoles");
 const usersTableNavLink = document.getElementById("allUsersTable");
 const addUserForm = document.querySelector(".add-user-form");
-
-// submit
 const addButtonSubmit = document.getElementById("newUserButton");
 const requestURL = 'http://localhost:8080/users';
-
-// const usersTableNavLink = document.getElementById("horizontal_navigation-users_table");
-
 const allUsersTable = document.querySelector(".all-users-table");
 
+$(async function () {
+    // await getUser();
+    await infoUser();
+    // await tittle();
+    // await getUsers();
+    // await getNewUserForm();
+    // await getDefaultModal();
+    // await createUser();
 
+})
+const userFetch = {
+    head: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Referer': null
+    },
+    // findAllUsers: async () => await fetch('api/users'),
+    findUserByUsername: async () => await fetch(`user`),
+    // findOneUser: async (id) => await fetch(`api/users/${id}`),
+    // addNewUser: async (user) => await fetch('api/users', {method: 'POST', headers: userFetch.head, body: JSON.stringify(user)}),
+    // updateUser: async (user, id) => await fetch(`api/users/${id}`, {method: 'PUT', headers: userFetch.head, body: JSON.stringify(user)}),
+    // deleteUser: async (id) => await fetch(`api/users/${id}`, {method: 'DELETE', headers: userFetch.head})
+}
+
+async function infoUser() {
+    let temp = '';
+    const info = document.querySelector('#info');
+    await userFetch.findUserByUsername()
+        .then(res => res.json())
+        .then(user => {
+            temp += `
+                    <span class="font-weight-bold">${user.username}</span>
+                    <span class="font-weight-normal">with roles: ${user.roles.map(e => " " + e.name)}</span>       
+            `;
+        });
+    info.innerHTML = temp;
+}
 //Users table
 
 const fillUsers = (users) => {
