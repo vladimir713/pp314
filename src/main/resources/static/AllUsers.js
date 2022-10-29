@@ -33,7 +33,7 @@ const requestURL = 'http://localhost:8080/users';
 
 // const usersTableNavLink = document.getElementById("horizontal_navigation-users_table");
 
-const allUsersTable = document.querySelector(".all-users-table");
+const allUsersTable = document.querySelector("all-users-table");
 
 
 //Users table

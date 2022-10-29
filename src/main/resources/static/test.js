@@ -70,14 +70,14 @@ function getRolesFromAddUserForm() {
     let roles = Array.from(FormRoles.selectedOptions)
         .map(option => option.value);
     let rolesToAdd = [];
-    if (roles.includes("1")) {
+    if (roles.includes("2")) {
         let role1 = {
             id: 1,
             name: "ADMIN"
         }
         rolesToAdd.push(role1);
     }
-    if (roles.includes("2")) {
+    if (roles.includes("1")) {
         let role2 = {
             id: 2,
             name: "USER"
@@ -104,9 +104,11 @@ addUserForm.addEventListener("submit", (e) => {
         })
     })
         .then(() => {
+            getAllUsers();
             usersTableNavLink.click();
-            console.log(getRolesFromAddUserForm() + "----------------------------------------------------")
-            location.reload();
+            // console.log(getRolesFromAddUserForm() + "----------------------------------------------------")
+            // location.reload();
+
         });
 })
 
@@ -132,14 +134,14 @@ function getRolesFromEditUserForm() {
     let roles = Array.from(editUsersRoles.selectedOptions)
         .map(option => option.value);
     let rolesToEdit = [];
-    if (roles.includes("1")) {
+    if (roles.includes("2")) {
         let role1 = {
             id: 1,
             name: "ADMIN"
         }
         rolesToEdit.push(role1);
     }
-    if (roles.includes("2")) {
+    if (roles.includes("1")) {
         let role2 = {
             id: 2,
             name: "USER"
@@ -219,6 +221,7 @@ allUsersTable.addEventListener("click", e => {
     if (editButtonIsPressed) {
         let currentUserId = e.target.dataset.id;
         fetch(requestURL + "/" + currentUserId, {
+            method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -265,10 +268,13 @@ allUsersTable.addEventListener("click", e => {
                 },
                 body: JSON.stringify(user)
             })
-                .then(res => console.log(res));
+                // .then(res => console.log(res));
+                .then(() => getAllUsers());
             modalEditExitBtn.click();
-            getAllUsers();
-            location.reload();
+            // console.log("----------------getAllUsers")
+            // getAllUsers();
+            // location.reload();
+            modalEditSubmitBtn.reset();
         })
     }
 })

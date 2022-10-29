@@ -75,7 +75,7 @@ public class UserServicesImpl implements UserService {
 
     @Override
     public void update(User user) {
-
+        System.out.println(user);
         if(user.getUsername() == null | user.getUsername().equals("")) {
             user.setUsername(show(user.getId()).getUsername());
         }
