@@ -44,6 +44,16 @@ async function infoUser() {
                     <span class="font-weight-bold">${user.username}</span>
                     <span class="font-weight-normal">with roles: ${user.roles.map(e => " " + e.name)}</span>       
             `;
+            //Добавляем информацию в таблицу
+            let userForPanel = `$(
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
+                <td>${user.age}</td>
+                <td>${user.username}</td>
+                <td>${user.roles.map(e => " " + e.name)}</td>)`;
+            $('#userPanelBody').append(userForPanel);
         });
     info.innerHTML = temp;
 }
