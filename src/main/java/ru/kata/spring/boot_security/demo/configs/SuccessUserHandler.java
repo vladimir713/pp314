@@ -29,10 +29,10 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
                 break;
             }
         }
-        if (hasUserRole) {
-            rs.sendRedirect(httpServletRequest, httpServletResponse, "/");
-        } else if (hasAdminRole) {
-            rs.sendRedirect(httpServletRequest, httpServletResponse, "/");
+        if (hasAdminRole) {
+            rs.sendRedirect(httpServletRequest, httpServletResponse, "/admin");
+        } else if (hasUserRole) {
+            rs.sendRedirect(httpServletRequest, httpServletResponse, "/user");
         }
         else {
             rs.sendRedirect(httpServletRequest, httpServletResponse, "/login");

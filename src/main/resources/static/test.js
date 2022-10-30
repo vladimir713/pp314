@@ -27,7 +27,7 @@ const userFetch = {
         'Referer': null
     },
     // findAllUsers: async () => await fetch('api/users'),
-    findUserByUsername: async () => await fetch(`user`),
+    findUserByUsername: async () => await fetch(`userAuth`),
     // findOneUser: async (id) => await fetch(`api/users/${id}`),
     // addNewUser: async (user) => await fetch('api/users', {method: 'POST', headers: userFetch.head, body: JSON.stringify(user)}),
     // updateUser: async (user, id) => await fetch(`api/users/${id}`, {method: 'PUT', headers: userFetch.head, body: JSON.stringify(user)}),
@@ -310,10 +310,10 @@ allUsersTable.addEventListener("click", e => {
                 // .then(res => console.log(res));
                 .then(() => getAllUsers());
             modalEditExitBtn.click();
-            // console.log("----------------getAllUsers")
-            // getAllUsers();
-            // location.reload();
-            modalEditSubmitBtn.reset();
+            console.log("----------------getAllUsers")
+            getAllUsers();
+            location.reload();
+            // modalEditSubmitBtn.reset();
         })
     }
 })

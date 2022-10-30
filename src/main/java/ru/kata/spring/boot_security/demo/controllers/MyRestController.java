@@ -60,7 +60,7 @@ public class MyRestController {
         return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/user")
+    @GetMapping("/userAuth")
     public ResponseEntity<User> getUserByUsername (Principal principal) {
         User user = userService.findByUsername(principal.getName());
         return new ResponseEntity<>(user,HttpStatus.OK);

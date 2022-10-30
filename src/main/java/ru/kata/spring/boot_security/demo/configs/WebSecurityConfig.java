@@ -39,7 +39,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
-//                .successHandler(successUserHandler)
+                .successHandler(successUserHandler)
                 .permitAll()
                 .and()
                 .logout()
