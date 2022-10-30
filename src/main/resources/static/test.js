@@ -272,7 +272,7 @@ allUsersTable.addEventListener("click", e => {
                 editUsersFirstName.value = user.firstName;
                 editUsersLastName.value = user.lastName;
                 editUsersUsername.value = user.username;
-                editUsersPassword.value = user.password;
+                // editUsersPassword.value = user.password;
                 editUsersAge.value = user.age;
 
                 let editRoles = user.roles.map(role => role.name)
@@ -295,7 +295,7 @@ allUsersTable.addEventListener("click", e => {
                 firstName: editUsersFirstName.value,
                 lastName: editUsersLastName.value,
                 username: editUsersUsername.value,
-                password: editUsersPassword.value,
+                // password: editUsersPassword.value,
                 age: editUsersAge.value,
                 roles: getRolesFromEditUserForm()
             }
@@ -308,11 +308,14 @@ allUsersTable.addEventListener("click", e => {
                 body: JSON.stringify(user)
             })
                 // .then(res => console.log(res));
-                .then(() => getAllUsers());
-            modalEditExitBtn.click();
-            console.log("----------------getAllUsers")
-            getAllUsers();
-            location.reload();
+                .then(() => {
+                    modalEditExitBtn.click();
+                    getAllUsers();
+                })
+            // modalEditExitBtn.click();
+            // console.log("----------------getAllUsers")
+            // getAllUsers();
+            // location.reload();
             // modalEditSubmitBtn.reset();
         })
     }
