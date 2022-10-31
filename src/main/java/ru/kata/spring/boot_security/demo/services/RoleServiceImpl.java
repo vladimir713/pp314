@@ -7,7 +7,6 @@ import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -23,16 +22,4 @@ public class RoleServiceImpl implements RoleService {
         return new ArrayList<>(roleRepository.findAll());
     }
 
-    public Role findByName(String name) {
-        return roleRepository.findByName(name);
-    }
-    @Transactional
-    public void save(Role role) {
-        roleRepository.saveAndFlush(role);
-    }
-
-    @Override
-    public Role findById(Long id) {
-        return roleRepository.findById(Math.toIntExact(id)).orElse(null);
-    }
 }

@@ -7,11 +7,4 @@ import java.util.Collection;
 public interface RoleService {
 
     Collection<Role> findAll();
-
-    Role findByName(String name);
-
-    void save(Role role);
-
-    Role findById(Long id);
-
 }

@@ -6,19 +6,11 @@ const FormAge = document.getElementById("ag");
 const FormRoles = document.getElementById("newUserRoles");
 const usersTableNavLink = document.getElementById("allUsersTable");
 const addUserForm = document.querySelector(".add-user-form");
-const addButtonSubmit = document.getElementById("newUserButton");
 const requestURL = 'http://localhost:8080/users';
 const allUsersTable = document.querySelector(".all-users-table");
 
 $(async function () {
-    // await getUser();
     await infoUser();
-    // await tittle();
-    // await getUsers();
-    // await getNewUserForm();
-    // await getDefaultModal();
-    // await createUser();
-
 })
 const userFetch = {
     head: {
@@ -26,13 +18,8 @@ const userFetch = {
         'Content-Type': 'application/json',
         'Referer': null
     },
-    // findAllUsers: async () => await fetch('api/users'),
     findUserByUsername: async () => await fetch(`userAuth`),
-    // findOneUser: async (id) => await fetch(`api/users/${id}`),
-    // addNewUser: async (user) => await fetch('api/users', {method: 'POST', headers: userFetch.head, body: JSON.stringify(user)}),
-    // updateUser: async (user, id) => await fetch(`api/users/${id}`, {method: 'PUT', headers: userFetch.head, body: JSON.stringify(user)}),
-    // deleteUser: async (id) => await fetch(`api/users/${id}`, {method: 'DELETE', headers: userFetch.head})
-}
+    }
 
 async function infoUser() {
     let temp = '';
@@ -58,7 +45,6 @@ async function infoUser() {
     info.innerHTML = temp;
 }
 //Users table
-
 const fillUsers = (users) => {
     if (users.length > 0) {
         let temp = '';
@@ -98,13 +84,7 @@ function getAllUsers () {
             fillUsers(data);
         })
 }
-
 getAllUsers();
-
-
-// form for NEW user
-
-
 
 //role
 function getRolesFromAddUserForm() {
@@ -147,9 +127,6 @@ addUserForm.addEventListener("submit", (e) => {
         .then(() => {
             getAllUsers();
             usersTableNavLink.click();
-            // console.log(getRolesFromAddUserForm() + "----------------------------------------------------")
-            // location.reload();
-
         });
 })
 
@@ -167,9 +144,6 @@ const deleteRoleUserOption = document.getElementById("deleteRoleUser");
 const modalDeleteSubmitBtn = document.getElementById("deleteSubmit");
 const modalDeleteExitBtn = document.getElementById("deleteExit");
 const modalDeleteCloseBtn = document.getElementById("deleteClose");
-
-
-
 
 function getRolesFromEditUserForm() {
     let roles = Array.from(editUsersRoles.selectedOptions)
@@ -198,9 +172,7 @@ allUsersTable.addEventListener("click", e => {
     let delButtonIsPressed = e.target.id === 'btnDeleteCall';
     let editButtonIsPressed = e.target.id === 'btnEditCall';
 
-
 //getting data for DELETE user
-
     const deleteUsersId = document.getElementById("dId")
     const deleteUsersName = document.getElementById("dFirstname")
     const deleteUsersLastName = document.getElementById("dLastname")
@@ -249,13 +221,11 @@ allUsersTable.addEventListener("click", e => {
     }
 
     //getting data for EDIT user
-
     const editUsersId = document.getElementById("idEdit");
     const editUsersFirstName = document.getElementById("firstNameEdit");
     const editUsersLastName = document.getElementById("lastNameEdit");
     const editUsersAge = document.getElementById("ageEdit");
     const editUsersUsername = document.getElementById("emailEdit");
-    const editUsersPassword = document.getElementById("passwordEdit");
 
     if (editButtonIsPressed) {
         let currentUserId = e.target.dataset.id;
@@ -272,7 +242,6 @@ allUsersTable.addEventListener("click", e => {
                 editUsersFirstName.value = user.firstName;
                 editUsersLastName.value = user.lastName;
                 editUsersUsername.value = user.username;
-                // editUsersPassword.value = user.password;
                 editUsersAge.value = user.age;
 
                 let editRoles = user.roles.map(role => role.name)
@@ -295,7 +264,6 @@ allUsersTable.addEventListener("click", e => {
                 firstName: editUsersFirstName.value,
                 lastName: editUsersLastName.value,
                 username: editUsersUsername.value,
-                // password: editUsersPassword.value,
                 age: editUsersAge.value,
                 roles: getRolesFromEditUserForm()
             }
@@ -307,16 +275,10 @@ allUsersTable.addEventListener("click", e => {
                 },
                 body: JSON.stringify(user)
             })
-                // .then(res => console.log(res));
                 .then(() => {
                     modalEditExitBtn.click();
                     getAllUsers();
                 })
-            // modalEditExitBtn.click();
-            // console.log("----------------getAllUsers")
-            // getAllUsers();
-            // location.reload();
-            // modalEditSubmitBtn.reset();
         })
     }
 })

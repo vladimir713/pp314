@@ -35,6 +35,8 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").authenticated()
                 .antMatchers("/static/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -46,31 +48,9 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                 .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
-//                .and()
-//                .csrf().disable()
-//                .authorizeRequests();
                 .and()
                 .headers()
                 .frameOptions().sameOrigin();
-//                .antMatchers("/").authenticated();
-//        http
-//                .csrf().disable();
-//                .authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/admin/**").hasAuthority("ADMIN")
-//                .antMatchers("/user/**").authenticated()
-//                .antMatchers("/users/**").authenticated()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .successHandler(successUserHandler)
-//                .permitAll()
-//                .failureUrl("/")
-//                .and()
-//                .logout()
-//                .permitAll()
-//                .logoutSuccessUrl("/");
     return http.build();
     }
 

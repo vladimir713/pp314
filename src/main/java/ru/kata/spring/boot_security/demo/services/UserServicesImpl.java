@@ -79,20 +79,11 @@ public class UserServicesImpl implements UserService {
         if(user.getUsername() == null | user.getUsername().equals("")) {
             user.setUsername(show(user.getId()).getUsername());
         }
-//        if(user.getPassword() == null | user.getPassword().equals("")) {
-            user.setPassword(show(user.getId()).getPassword());
-//        } else {
-//            user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        }
+        user.setPassword(show(user.getId()).getPassword());
         if(user.getRoles() == null) {
             user.setRoles(show(user.getId()).getRoles());
         }
         ur.saveAndFlush(user);
-    }
-
-    @Override
-    public List<Role> listRoles() {
-        return roleRepository.findAll();
     }
 
     @Transactional

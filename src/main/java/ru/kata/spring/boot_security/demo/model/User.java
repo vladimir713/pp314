@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 /**
  * @author Vladimir Chugunov
@@ -39,9 +38,7 @@ public class User implements UserDetails {
     public User() {
 
     }
-    public String showRoles() {
-        return this.getRoles().stream().map(Role::getName).map(String::new).collect(Collectors.joining(" "));
-    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();

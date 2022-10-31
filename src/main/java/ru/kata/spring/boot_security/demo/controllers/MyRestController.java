@@ -39,9 +39,11 @@ public class MyRestController {
 
     @PostMapping("/users")
         public ResponseEntity<User> addNewUser(@RequestBody User user) {
-        userService.save(user);
-        System.out.println("-----created----------------------------------");
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        if (userService.save(user)) {
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity <>(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     @PutMapping("/users")
